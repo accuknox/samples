@@ -61,14 +61,12 @@ header .cart-size-circle {
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 28px;
+  top: 24px;
   left: 8px;
-  padding-top: 2px;
-  padding-left: 1px;
   width: 16px;
   height: 16px;
   font-size: 11px;
-  border-radius: 50%;
+  border-radius: 6px 6px 0 6px;
   color: white;
   background-color: #853B5C;
 }
