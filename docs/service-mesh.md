@@ -47,7 +47,7 @@ gcloud container clusters create onlineboutique \
    ```
 
 
-## Additional service mesh demos using OnlineBoutique 
+## Aditional service mesh demos using OnlineBoutique 
 
 - [Canary deployment](https://github.com/GoogleCloudPlatform/istio-samples/tree/master/istio-canary-gke)
 - [Security (mTLS, JWT, Authorization)](https://github.com/GoogleCloudPlatform/istio-samples/tree/master/security-intro)

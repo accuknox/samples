@@ -22,7 +22,7 @@ html, body {
 
 body {
   color: #111111;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
   display: flex;
   flex-direction: column;
 }
