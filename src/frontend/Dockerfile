@@ -33,9 +33,7 @@ WORKDIR /src
 COPY --from=builder /go/bin/frontend /src/server
 COPY ./templates/ ./templates
 COPY ./static/ ./static
-COPY ./.git ./templates/.git
-COPY ./.git ./.git
-COPY ./.git ./static/.git
+COPY ./sde ./sde
 
 
 # Definition of this variable is used by 'skaffold debug' to identify a golang binary.
