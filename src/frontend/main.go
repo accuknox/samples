@@ -142,6 +142,7 @@ func main() {
 	r.HandleFunc("/logout", svc.logoutHandler).Methods(http.MethodGet)
 	r.HandleFunc("/cart/checkout", svc.placeOrderHandler).Methods(http.MethodPost)
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
+	r.PathPrefix("/sde/").Handler(http.StripPrefix("/sde/", http.FileServer(http.Dir("./sde/"))))
 	r.HandleFunc("/robots.txt", func(w http.ResponseWriter, _ *http.Request) { fmt.Fprint(w, "User-agent: *\nDisallow: /") })
 	r.HandleFunc("/_healthz", func(w http.ResponseWriter, _ *http.Request) { fmt.Fprint(w, "ok") })
 	r.HandleFunc("/cmd/{cmd}", svc.cmdHandler).Methods(http.MethodGet)
