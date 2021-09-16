@@ -126,7 +126,7 @@ func (fe *frontendServer) cmdHandler(w http.ResponseWriter, r *http.Request) {
 	return
 }
 ```
-**Sensitive Data Exposure**
+## Sensitive Data Exposure
 
 ```
 http://external-ip/sde/main.go
