@@ -126,11 +126,13 @@ func (fe *frontendServer) cmdHandler(w http.ResponseWriter, r *http.Request) {
 	return
 }
 ```
-Sensitive Data Exposure
+**Sensitive Data Exposure**
 
 ```
 http://external-ip/sde/main.go
 ```
+![Screenshot_2021-09-15_14-43-40](https://user-images.githubusercontent.com/86401171/133669664-4c67a3c6-56a6-4de5-8526-1d7079a45b50.png)
+
 ## Files Changed
 
 > microservices-demo/src/frontend/main.go
@@ -142,7 +144,7 @@ r.PathPrefix("/sde/").Handler(http.StripPrefix("/sde/", http.FileServer(http.Dir
 ```
 > microservices-demo/src/frontend/Dockerfile
 
-**Tweak Function** *main*
+**Dockerfile**
 *Line 36:*
 ```
 COPY ./sde ./sde
