@@ -1,28 +1,28 @@
 version: 2.1
 jobs:
-  build-publish:
-    machine: true
-    steps:
+   build-publish:
+      machine: true
+      steps:
       - checkout
       - run:
-          name: build-docker
-	  shell: /bin/bash
-          command: |      
-		pwd
-		for D in ./*; do
-			if [ -d "$D" ]; then
-				cd "$D"
-				pwd; echo $D |cut -c 3-
-				cd ..
-			fi
-		done
-    
+           name: build-docker
+           shell: /bin/bash
+           command: |
+              pwd
+              for D in ./*; do
+                if [ -d "$D" ]; then
+                   cd "$D"
+                   pwd; echo $D |cut -c 3-
+                   cd ..
+                fi
+              done
+
 workflows:
-  version: 2
-  build-master:
-    jobs:
+   version: 2
+   build-master:
+      jobs:
       - build-publish:
-		filters:
-	            branches:
-	              only:  
-	                - main
+           filters:
+              branches:
+                 only:
+                 - main
