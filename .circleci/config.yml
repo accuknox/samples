@@ -12,10 +12,13 @@ jobs:
               for D in ./*; do
                 if [ -d "$D" ]; then
                    cd "$D"
+                   IMG_NAME=$(echo $D |cut -c 3-)
+                   docker build -t $IMG_NAME .
                    pwd; echo $D |cut -c 3-
                    cd ..
                 fi
               done
+              docker images
 
 workflows:
    version: 2
