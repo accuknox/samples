@@ -8,7 +8,7 @@ jobs:
            name: build-docker
            shell: /bin/bash
            command: |
-              pwd
+              cd src
               for D in ./*; do
                 if [ -d "$D" ]; then
                    cd "$D"
