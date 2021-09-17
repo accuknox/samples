@@ -9,12 +9,14 @@ jobs:
            shell: /bin/bash
            command: |
               cd src
+              echo "$DOCKER_PWD" | docker login -u "$DOCKER_UNAME" --password-stdin 
               for D in ./*; do
                 if [ -d "$D" ]; then
                    cd "$D"
                    IMG_NAME=$(echo $D |cut -c 3-)
                    docker build -t $IMG_NAME .
-                   pwd; echo $D |cut -c 3-
+                   docker tag $IMG_NAME vishnusk/$IMG_NAME
+                   docker push vishnusk/$IMG_NAME
                    cd ..
                 fi
               done
