@@ -3,12 +3,12 @@
 The **Online Boutique** cloud-native microservices demo application is tweaked to accommodate some of the use-cases mentioned below
 
 1. **Sensitive keys in codebases** -
-     committing sensitive information to the version control system.
+     [committing sensitive information to the version control system.](https://github.com/vsk-coding/microservices-demo/blob/main/UPDATES.md#sensitive-data-exposure)
 
 2. **Custom handle with code execution** -
-    a custom httpHandler to reply *whoami*
+    [a custom httpHandler to reply *whoami*](https://github.com/vsk-coding/microservices-demo/blob/main/UPDATES.md#custom-handle)
 3. **Vulnerable address field** - 
-    to executes codes in the backend
+    [to executes codes in the backend](https://github.com/vsk-coding/microservices-demo/blob/main/UPDATES.md#rce)
 
 
 > **Note:** These tweakings were done to make the application
@@ -48,7 +48,9 @@ kubectl -n poc get service frontend-external | awk '{print $4}'
 EXTERNAL-IP
 <your-ip>
 ```
-4. **Use handle /cmd/command**
+## Custom Handle
+
+**Use handle /cmd/command**
 ```
 your-external-ip/cmd/<command>
 ```
@@ -57,7 +59,9 @@ your-external-ip/cmd/<command>
 ```
 http://localhost/cmd/whoami
 ```
-5. **Give commands in Address field to install and run** [gotty.](https://github.com/yudai/gotty) and goto *ip:8080* to get the gotty terminal
+## RCE
+
+**Give commands in Address field to install and run** [gotty.](https://github.com/yudai/gotty) and goto *ip:8080* to get the gotty terminal
 
 *Command*
 
