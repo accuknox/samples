@@ -33,7 +33,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/emailservice:v0.2.4
+        image: vishnusk/emailservice:latest
         ports:
         - containerPort: 8080
         env:
@@ -158,7 +158,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/recommendationservice:v0.2.4
+        image: vishnusk/recommendationservice:latest
         ports:
         - containerPort: 8080
         readinessProbe:
@@ -219,7 +219,7 @@ spec:
       serviceAccountName: default
       containers:
         - name: server
-          image: vishnusk/frontend-google:latest
+          image: vishnusk/frontend:latest
           ports:
           - containerPort: 8080
           readinessProbe:
@@ -319,7 +319,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/paymentservice:v0.2.4
+        image: vishnusk/paymentservice:latest
         ports:
         - containerPort: 50051
         env:
@@ -369,7 +369,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/productcatalogservice:v0.2.4
+        image: vishnusk/productcatalogservice:latest
         ports:
         - containerPort: 3550
         env:
@@ -500,7 +500,7 @@ spec:
           value: "frontend:80"
       containers:
       - name: main
-        image: gcr.io/google-samples/microservices-demo/loadgenerator:v0.2.4
+        image: vishnusk/loadgenerator:latest
         env:
         - name: FRONTEND_ADDR
           value: "frontend:80"
@@ -531,7 +531,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/currencyservice:v0.2.4
+        image: vishnusk/currencyservice:latest
         ports:
         - name: grpc
           containerPort: 7000
@@ -587,7 +587,7 @@ spec:
       serviceAccountName: default
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/shippingservice:v0.2.4
+        image: vishnusk/shippingservice:latest
         ports:
         - containerPort: 50051
         env:
@@ -699,7 +699,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: gcr.io/google-samples/microservices-demo/adservice:v0.2.4
+        image: vishnusk/adservice:latest
         ports:
         - containerPort: 9555
         env:
@@ -742,3 +742,4 @@ spec:
     port: 9555
     targetPort: 9555
 ---
+
