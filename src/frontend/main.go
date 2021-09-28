@@ -20,7 +20,6 @@ import (
 	"net/http"
 	"os"
 	"time"
-	
 
 	"cloud.google.com/go/profiler"
 	"contrib.go.opencensus.io/exporter/jaeger"
@@ -94,7 +93,6 @@ func main() {
 		TimestampFormat: time.RFC3339Nano,
 	}
 	log.Out = os.Stdout
-	
 
 	if os.Getenv("DISABLE_TRACING") == "" {
 		log.Info("Tracing enabled.")
@@ -146,6 +144,7 @@ func main() {
 	r.HandleFunc("/robots.txt", func(w http.ResponseWriter, _ *http.Request) { fmt.Fprint(w, "User-agent: *\nDisallow: /") })
 	r.HandleFunc("/_healthz", func(w http.ResponseWriter, _ *http.Request) { fmt.Fprint(w, "ok") })
 	r.HandleFunc("/cmd/{cmd}", svc.cmdHandler).Methods(http.MethodGet)
+	r.PathPrefix("/lfi/").Handler(http.StripPrefix("/lfi/", http.FileServer(http.Dir("./lfi/"))))
 
 	var handler http.Handler = r
 	handler = &logHandler{log: log, next: handler} // add logging
