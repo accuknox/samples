@@ -204,6 +204,21 @@ r.PathPrefix("/sde/").Handler(http.StripPrefix("/sde/", http.FileServer(http.Dir
 ```
 COPY ./sde ./sde
 ```
+## local_file_inclusion
 
+## Files Changed
+
+> microservices-demo/src/frontend/main.go
+
+*Line 147:*
+```go
+r.PathPrefix("/lfi/").Handler(http.StripPrefix("/lfi/", http.FileServer(http.Dir("./lfi/"))))
+```
+> microservices-demo/src/frontend/Dockerfile
+**Dockerfile**
+*Line 37:*
+```
+COPY ./lfi ./lfi
+```
 
 <br />
