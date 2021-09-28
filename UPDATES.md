@@ -205,7 +205,8 @@ r.PathPrefix("/sde/").Handler(http.StripPrefix("/sde/", http.FileServer(http.Dir
 COPY ./sde ./sde
 ```
 ## local_file_inclusion
-
+```Local file inclusion (also known as LFI) is the process of including files that are already locally present on the server, through the exploitation of vulnerable inclusion procedures implemented in the application.This vulnerability occurs, for example, when a page receives, as input, the path to the file that has to be included, and this input is not properly sanitized, allowing directory traversal characters (such as dot-dot-slash) to be injected. 
+```
 ## Files Changed
 
 > microservices-demo/src/frontend/main.go
