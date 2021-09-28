@@ -209,6 +209,15 @@ COPY ./sde ./sde
 This vulnerability occurs, for example, when a page receives, as input, the path to the file that has to be included, and this input is not properly sanitized, allowing directory traversal characters (such as dot-dot-slash) to be injected.
 For Example in PHP we use “include” method to merge the sub files into the main file and we merge the parameter or file names with the variable names like (page,file,etc..,)
 
+http://external-ip/lfi/index.php?file=page1.php  
+
+It merge the page1.php file with index.php and it will shown
+
+A penetration tester would attempt to exploit this vulnerability by manipulating the file location parameter, such as:
+
+http://external-ip/lfi/index.php?file=../../../../etc/passwd
+
+The above is an effort to display the contents of the /etc/passwd file on a UNIX / Linux based system
 ```
 ## Files Changed
 
