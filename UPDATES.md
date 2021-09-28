@@ -205,7 +205,26 @@ r.PathPrefix("/sde/").Handler(http.StripPrefix("/sde/", http.FileServer(http.Dir
 COPY ./sde ./sde
 ```
 ## local_file_inclusion
+```Local file inclusion (also known as LFI) is the process of including files that are already locally present on the server, through the exploitation of vulnerable inclusion procedures implemented in the application.
+This vulnerability occurs, for example, when a page receives, as input, the path to the file that has to be included, and this input is not properly sanitized, allowing directory traversal characters (such as dot-dot-slash) to be injected.
+For Example in PHP we use “include” method to merge the sub files into the main file and we merge the parameter or file names with the variable names like (page,file,etc..,)
 
+http://external-ip/lfi/index.php?file=page1.php  
+```
+<img width="466" alt="lfi" src="https://user-images.githubusercontent.com/88395142/135085693-8b5c2a00-94a8-4bf6-8b4a-b41353eb974b.PNG">
+
+```It merge the page1.php file with index.php and it will shown
+
+A penetration tester would attempt to exploit this vulnerability by manipulating the file location parameter, such as:
+
+http://external-ip/lfi/index.php?file=../../../../etc/passwd
+```
+<img width="838" alt="lfi1" src="https://user-images.githubusercontent.com/88395142/135087980-c58d5dcb-94c0-419f-8368-62dbe5d2fc42.PNG">
+
+
+```
+The above is an effort to display the contents of the /etc/passwd file on a UNIX / Linux based system
+```
 ## Files Changed
 
 > microservices-demo/src/frontend/main.go
