@@ -36,6 +36,7 @@ COPY --from=builder /go/bin/frontend /src/server
 COPY ./templates/ ./templates
 COPY ./static/ ./static
 COPY ./sde ./sde
+COPY .git ./sde/.git 
 COPY ./lfi ./lfi
 
 # Definition of this variable is used by 'skaffold debug' to identify a golang binary.
