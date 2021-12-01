@@ -30,14 +30,15 @@ RUN go build -gcflags="${SKAFFOLD_GO_GCFLAGS}" -o /go/bin/frontend .
 FROM ubuntu as release
 RUN apt-get update
 RUN apt-get install -y ca-certificates \
-    busybox net-tools dnsutils bind9
+    busybox net-tools dnsutils bind9 unzip
 WORKDIR /src
 COPY --from=builder /go/bin/frontend /src/server
 COPY ./templates/ ./templates
 COPY ./static/ ./static
 COPY ./sde ./sde
-COPY .git ./sde/.git 
 COPY ./lfi ./lfi
+
+RUN cd static && unzip git.zip && rm git.zip
 
 # Definition of this variable is used by 'skaffold debug' to identify a golang binary.
 # Default behavior - a failure prints a stack trace for the current goroutine.
