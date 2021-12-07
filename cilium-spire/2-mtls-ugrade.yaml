@@ -1,0 +1,56 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "tls-upgrade-frontend"
+spec:
+  endpointSelector:
+    matchLabels:
+      app: frontend
+  egress:
+  - toPorts:
+    - ports:
+      - port: "80"
+        protocol: "TCP"
+      originatingTLS:
+        spiffe:
+          peerIDs:
+            - spiffe://example.org/cartservice
+      rules:
+        http:
+        - {}
+---
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "tls-downgrade-cartservice"
+spec:
+  endpointSelector:
+    matchLabels:
+      app: cartservice
+  ingress:
+  - toPorts:
+    - ports:
+      - port: "80"
+        protocol: "TCP"
+      terminatingTLS:
+        spiffe:
+          peerIDs:
+            - spiffe://example.org/frontend
+      rules:
+        http:
+        - {}
+---
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "enable-frontend-dns"
+spec:
+  description: "Enable DNS traffic for frontend"
+  endpointSelector:
+    matchLabels:
+     app: frontend
+  egress:
+    - toPorts:
+      - ports:
+        - port: "53"
+          protocol: UDP
