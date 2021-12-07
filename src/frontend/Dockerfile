@@ -14,6 +14,7 @@
 
 FROM golang:1.15 as builder
 RUN apt-get update
+RUN apt-get install -y iputils-ping
 RUN apt-get install -y ca-certificates git
 RUN apt-get install -y build-essential
 WORKDIR /src
