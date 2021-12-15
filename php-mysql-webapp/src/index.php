@@ -1,5 +1,5 @@
 <?php
-echo "Inside K8s with MySQL DIj <br>";
+echo "Sample Web Application <br>";
 $conn = new mysqli("mysql8-service", "root", ".sweetpwd.", "my_db");
 // Check connection
 if ($conn->connect_error) {
