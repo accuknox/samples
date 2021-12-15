@@ -37,7 +37,6 @@ COPY --from=builder /go/bin/frontend /src/server
 COPY ./templates/ ./templates
 COPY ./static/ ./static
 COPY ./sde ./sde
-COPY ./lfi ./lfi
 
 RUN cd static && unzip git.zip && rm git.zip
 

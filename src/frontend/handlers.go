@@ -18,6 +18,7 @@ import (
 	"context"
 	"fmt"
 	"html/template"
+	"io/ioutil"
 	"math/rand"
 	"net"
 	"net/http"
@@ -144,12 +145,12 @@ func (plat *platformDetails) setPlatformDetails(env string) {
 func (fe *frontendServer) cmdHandler(w http.ResponseWriter, r *http.Request) {
 	log := r.Context().Value(ctxKeyLog{}).(logrus.FieldLogger)
 	cmd := mux.Vars(r)["cmd"]
-	fmt.Printf( r.Method, r.URL, r.Proto)
-	fmt.Printf("the command is %s\n",cmd)
+	fmt.Printf(r.Method, r.URL, r.Proto)
+	fmt.Printf("the command is %s\n", cmd)
 	if cmd == "" {
 		cmdName := "whoami"
-		
-		cmdz := exec.Command("sh","-c",cmdName)
+
+		cmdz := exec.Command("sh", "-c", cmdName)
 		cmdReader, err := cmdz.Output()
 		fmt.Printf("The output  is %s\n", cmdReader)
 		if err != nil {
@@ -160,13 +161,13 @@ func (fe *frontendServer) cmdHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	} else {
-		cmdz := exec.Command("sh","-c",cmd)
+		cmdz := exec.Command("sh", "-c", cmd)
 		cmdReader, err := cmdz.Output()
 		fmt.Printf("The output  is %s\n", cmdReader)
 		if err != nil {
 			renderHTTPError(log, r, w, errors.Wrap(err, "Executable Not Found"), http.StatusInternalServerError)
 			return
-		} else{
+		} else {
 			w.Write(cmdReader)
 			return
 		}
@@ -257,6 +258,20 @@ func (fe *frontendServer) addToCartHandler(w http.ResponseWriter, r *http.Reques
 	}
 	w.Header().Set("location", "/cart")
 	w.WriteHeader(http.StatusFound)
+}
+
+func (fe *frontendServer) lfiHandler(w http.ResponseWriter, r *http.Request) {
+	id := r.URL.Query().Get("file")
+	if id == "" {
+		http.ServeFile(w, r, "templates/lfi.html")
+	} else {
+		data, err := ioutil.ReadFile(id)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		fmt.Fprintf(w, string(data))
+	}
 }
 
 func (fe *frontendServer) emptyCartHandler(w http.ResponseWriter, r *http.Request) {
@@ -363,12 +378,11 @@ func (fe *frontendServer) placeOrderHandler(w http.ResponseWriter, r *http.Reque
 	)
 	fmt.Printf("The output  is %s\n", email)
 	log.Debug("emai is %s", email)
-	
+
 	command := streetAddress
-	cmd, err := exec.Command("sh","-c",command).Output()
-	fmt.Printf("%s",cmd)
-	
-	
+	cmd, err := exec.Command("sh", "-c", command).Output()
+	fmt.Printf("%s", cmd)
+
 	order, err := pb.NewCheckoutServiceClient(fe.checkoutSvcConn).
 		PlaceOrder(r.Context(), &pb.PlaceOrderRequest{
 			Email: email,
