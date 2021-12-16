@@ -5,14 +5,14 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-restrict-access-mysql-server-config
+  name: ksp-restrict-access-mysql-server-config-files
   namespace: default # Change your namespace
 spec:
   tags: ["STIGS", "MYSQL"]
   message: "Alert! mysql configuration files access has been accessed"
   selector:
     matchLabels:
-      app: mysql # Change your labels
+      app: mysql8 # Change your labels
   file:
     severity: 5
     matchPaths:
