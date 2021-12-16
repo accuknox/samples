@@ -12,7 +12,7 @@ spec:
   message: "Alert! mysql configuration files access has been accessed"
   selector:
     matchLabels:
-      app: mysql # Change your labels
+      app: mysql8 # Change your labels
   file:
     severity: 5
     matchPaths:
