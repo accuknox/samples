@@ -1,0 +1,37 @@
+## bookstore.yaml
+## —-------------
+ 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: online-book-store
+ labels:
+   app: bookstore
+spec:
+ replicas: 1
+ selector:
+   matchLabels:
+     app: bookstore
+ template:
+   metadata:
+     labels:
+       app: bookstore
+   spec:
+     containers:
+     - name: online-book-store
+       image: gcr.io/mimetic-kit-294408/accuknox-poc/onlinebookstore:v1
+       ports:
+       - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: online-book-store
+spec:
+ type: LoadBalancer
+ selector:
+   app: bookstore
+ ports:
+   - protocol: TCP
+     port: 8080
+     targetPort: 8080
