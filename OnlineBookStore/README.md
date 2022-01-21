@@ -2,7 +2,7 @@
 **Online Book Store** is a Java-MySQL demo application.
 Online Book store consists of a 2-tier microservices application. The application is for selling books online, maintaining books selling history, adding and managing books etc.
 
-This application uses Java for Backe-End and database used is MySQL.
+This application uses Java for Back-End and database used is MySQL.
 
  This application works on any Kubernetes cluster, as well as Google
 Kubernetes Engine. It’s **easy to deploy**.
