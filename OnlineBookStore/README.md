@@ -1,3 +1,16 @@
+
+**Online Book Store** is a demo application.
+Online Book store consists of a 2-tier microservices application. The application is for selling books online, maintaining books selling history, adding and managing books etc.
+
+This application uses Java for Backe-End and database used is MySQL.
+
+ This application works on any Kubernetes cluster, as well as Google
+Kubernetes Engine. It’s **easy to deploy**.
+
+If you’re using this demo, please **★Star** this repository.
+
+### Quickstart
+
 1. **Clone this repository.**
 
 ```
