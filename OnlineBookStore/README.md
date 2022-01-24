@@ -108,7 +108,7 @@ exit
 
 8. **Deploy the bookstore application.**
 ```
-kubectl apply -f https://raw.githubusercontent.com/accuknox/microservices-demo/main/OnlineBookStore/bookstore.yaml
+kubectl apply -f https://raw.githubusercontent.com/accuknox/microservices-demo/main/OnlineBookStore/bookstore.yaml -n bookstore
 ```
 9.  **Access the web frontend in a browser**  using the frontend's  `EXTERNAL_IP`.
 
