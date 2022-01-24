@@ -113,7 +113,7 @@ kubectl apply -f https://raw.githubusercontent.com/accuknox/microservices-demo/m
 9.  **Access the web frontend in a browser**  using the frontend's  `EXTERNAL_IP`.
 
 ```
-kubectl get service online-book-store | awk '{print $4}'
+kubectl get service online-book-store -n bookstore | awk '{print $4}'
 
 ```
 
