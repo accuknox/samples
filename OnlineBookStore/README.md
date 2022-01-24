@@ -39,10 +39,14 @@ kubectl apply -f https://raw.githubusercontent.com/accuknox/microservices-demo/m
 kubectl get po,svc -n bookstore
 ```
 
-After a few minutes, you should see:
+After a few seconds, you should see:
 
 ```
-NAME                                     READY   STATUS    RESTARTS   AGE
+NAME                         READY   STATUS    RESTARTS   AGE
+pod/mysql-68579b78bb-ptbm4   1/1     Running   0          17s
+
+NAME            TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+service/mysql   ClusterIP   None         <none>        3306/TCP   18s
 
 ```
 
