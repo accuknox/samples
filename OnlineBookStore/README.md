@@ -101,7 +101,9 @@ insert into users values('shashi','shashi','Shashi','Raj','Bihar','1236547089','
 ```
 commit;
 ```
-
+``
+exit
+```
 
 
 8. **Deploy the bookstore application.**
