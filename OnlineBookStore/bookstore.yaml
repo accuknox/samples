@@ -19,7 +19,7 @@ spec:
    spec:
      containers:
      - name: online-book-store
-       image: gcr.io/mimetic-kit-294408/accuknox-poc/onlinebookstore:v1
+       image: salman0code/onlinebookstore:v1
        ports:
        - containerPort: 8080
 ---
