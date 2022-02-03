@@ -4,14 +4,18 @@ To deploy the application to k8s
 
 1. **Clone the repo by git clone**
     ```
-    https://github.com/vsk-coding/flask-app-demo.git
+    git@github.com:accuknox/samples.git
     ```
-2. **Apply using kubectl**
+2. **Change directory to python-flask**
+    ```
+    cd python-flask
+    ```
+3. **Apply using kubectl**
    ```
    kubectl apply -f k8s.yaml
    ```
 
-3. **Use the single command to apply directly**
+4. **Use the single command to apply directly**
 ```
-kubectl apply -f https://raw.githubusercontent.com/vsk-coding/flask-app-demo/main/k8s.yaml
+kubectl apply -f https://raw.githubusercontent.com/accuknox/samples/main/python-flask/k8s.yaml
 ```
