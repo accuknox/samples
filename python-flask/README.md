@@ -4,7 +4,7 @@ To deploy the application to k8s
 
 1. **Clone the repo by git clone**
     ```
-    git@github.com:accuknox/samples.git
+    git clone git@github.com:accuknox/samples.git
     ```
 2. **Change directory to python-flask**
     ```
