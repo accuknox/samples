@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: pickle-app
-        image: vishnusk/pickle_vuln
+        image: accuknoxcys/python-flask
         ports:
         - containerPort: 8008
         env:
