@@ -16,6 +16,6 @@ To deploy the application to k8s
    ```
 
 4. **Use the single command to apply directly**
-```
-kubectl apply -f https://raw.githubusercontent.com/accuknox/samples/main/python-flask/k8s.yaml
-```
+   ```
+   kubectl apply -f https://raw.githubusercontent.com/accuknox/samples/main/python-flask/k8s.yaml
+   ```
