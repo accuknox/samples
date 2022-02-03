@@ -1,0 +1,86 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pickle-app
+spec:
+  selector:
+    matchLabels:
+      app: pickle-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pickle-app
+    spec:
+      containers:
+      - name: pickle-app
+        image: vishnusk/pickle_vuln
+        ports:
+        - containerPort: 8008
+        env:
+        - name: MYSQL_SERVICE_ADDR
+          value: "mysqlservice:3306"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pickle-svc
+  labels:
+    app: pickle-svc
+spec:
+  ports:
+  - port: 80
+    name: pickle-port
+    targetPort: 8008
+    protocol: TCP
+  selector:
+    app: pickle-app
+  type: LoadBalancer
+---
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - image: mysql:8.0
+        name: mysql
+        imagePullPolicy: Always
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: password
+        - name: MYSQL_DATABASE
+          value: my_db
+        - name: MYSQL_USER
+          value: user
+        - name: MYSQL_PASSWORD
+          value: passuser
+        args: ["--default-authentication-plugin=mysql_native_password"]
+        ports:
+        - containerPort: 3306
+          name: mysql
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysqlservice
+  labels:
+    app: mysql
+spec:
+  type: NodePort
+  ports:
+  - port: 3306
+    protocol: TCP
+  selector:
+    app: mysql

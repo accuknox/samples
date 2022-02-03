@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4">
+      <h3>{{ title }}</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <p>Upload a file. Only <code>.pkl</code> files are allowed.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <p>{{ description }}</p>
+    </div>
+  </div>
+  <form action="" method="post" enctype="multipart/form-data" novalidate>
+    {{ form.hidden_tag() }}
+    <div class="row">
+      <div class="col-md-4">
+        <p>{{ form.pickle_file }}</p>
+      </div>
+    </div>
+    {% for error in form.pickle_file.errors %}
+    <div class="row">
+      <div class="col-md-4">
+        <span style="color: red;">[{{ error }}]</span>
+      </div>
+    </div>
+    {% endfor %}
+    <div class="row">
+      <div class="col-md-4">
+        <p>{{ form.submit() }}</p>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}
