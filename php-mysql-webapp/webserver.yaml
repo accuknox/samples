@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: php-apache
-        image: dockertestpcl/learningk8s_website
+        image: knoxuser/php-apache:1
         imagePullPolicy: Always
         ports:
         - containerPort: 80
