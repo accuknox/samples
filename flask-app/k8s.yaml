@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: flask-app
-          image: accuknoxcys/flask-app
+          image: knoxuser/flask-app
           ports:
             - containerPort: 5000
 ---
