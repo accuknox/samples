@@ -6,7 +6,7 @@ metadata:
   name: nc-pod
 spec:
   containers:
-  - image: ubuntu
+  - image: knoxuser/nc-pod
     name: nc-pod
   dnsPolicy: ClusterFirst
   restartPolicy: Always
