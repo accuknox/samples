@@ -22,10 +22,19 @@ echo
 kubectl -n $ns_val apply -f https://raw.githubusercontent.com/accuknox/samples/main/log4j-demo/k8s-ldap.yaml
 sleep 2
 echo
+echo "Waiting for pods to be ready."
 while [[ "$(kubectl -n $ns_val get pods -l=app=nc-pod -o jsonpath='{.items[*].status.containerStatuses[0].ready}')" != "true" && "$(kubectl -n $ns_val get pods -l=app=java-ms -o jsonpath='{.items[*].status.containerStatuses[0].ready}')" != "true" ]]; do
    sleep 5
-   echo "Waiting for pods to be ready."
 done
+
+while true
+do
+   if [[ -z $(kubectl get po -n log4j | awk '{print $3}' | grep -i terminating) ]]
+   then
+      break
+   fi
+done
+
 
 ip=`kubectl get svc -A | grep nc-svc | awk '{print $5}'`
 ip_val=`kubectl get svc -A | grep java-ms-svc | awk '{print $5}'`
