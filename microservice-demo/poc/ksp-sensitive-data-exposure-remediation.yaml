@@ -1,0 +1,15 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: sensitive-data-exposure-remediation
+spec:
+  severity: 5
+  selector:
+    matchLabels:
+      app: frontend
+  file:
+    matchDirectories:
+    - dir: /src/static/.git/
+      recursive: true
+  action:
+    Block
