@@ -29,7 +29,7 @@ done
 
 while true
 do
-   if [[ -z $(kubectl get po -n log4j | awk '{print $3}' | grep -i terminating) ]]
+   if [[ -z $(kubectl get po -n $ns_val  | awk '{print $3}' | grep -i terminating) ]]
    then
       break
    fi
