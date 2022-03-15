@@ -1,0 +1,14 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: block-bin-path
+spec:
+  severity: 5
+  selector:
+    matchLabels:
+      app: frontend
+  process:
+    matchDirectories:
+    - dir: /bin/
+  action:
+    Block
