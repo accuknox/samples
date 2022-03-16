@@ -109,6 +109,42 @@ eof
   echo "kubectl -n $ns_val exec -it $pod_name -- nc -lvnp 4444"
   echo
   sleep 10
+
+  echo 
+  tput bold setaf 2; echo "Applying Security Policy. Please wait..."
+  cat << eof | kubectl -n $ns_val apply -f-
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "log4j-rule-to-block-rmi-access"
+spec:
+  endpointSelector:
+    matchLabels:
+      app: java-ms
+  egressDeny:
+  - toEntities:
+    - "world"
+  - toPorts:
+    - ports:
+      - port: "1099"
+      - port: "1389"
+  egress:
+    - toEntities:
+      - "all"
+    - toEndpoints:
+      - matchLabels:
+          "k8s:io.kubernetes.pod.namespace": kube-system
+          "k8s:k8s-app": kube-dns
+      toPorts:
+        - ports:
+           - port: "53"
+             protocol: ANY
+          rules:
+            dns:
+              - matchPattern: "*"
+
+eof
+
   tput bold setaf 2; echo "Creating CronJob Please wait..."
   cat << eof | kubectl -n $ns_val apply -f-
 apiVersion: batch/v1
@@ -231,6 +267,41 @@ eof
   echo
   kubectl -n $ns_val delete -f https://raw.githubusercontent.com/accuknox/samples/main/log4j-demo/k8s.yaml
   sleep 2
+
+  echo 
+  tput bold setaf 2; echo "Removing Security Policy. Please wait..."
+  cat << eof | kubectl -n $ns_val delete -f-
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "log4j-rule-to-block-rmi-access"
+spec:
+  endpointSelector:
+    matchLabels:
+      app: java-ms
+  egressDeny:
+  - toEntities:
+    - "world"
+  - toPorts:
+    - ports:
+      - port: "1099"
+      - port: "1389"
+  egress:
+    - toEntities:
+      - "all"
+    - toEndpoints:
+      - matchLabels:
+          "k8s:io.kubernetes.pod.namespace": kube-system
+          "k8s:k8s-app": kube-dns
+      toPorts:
+        - ports:
+           - port: "53"
+             protocol: ANY
+          rules:
+            dns:
+              - matchPattern: "*"
+
+eof
 
   echo
   tput bold setaf 2; echo "Deleting namespace '$ns_val'..."
