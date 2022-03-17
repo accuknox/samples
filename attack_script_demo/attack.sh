@@ -26,7 +26,7 @@ boutique_deploy() {
 	then
 	
   		echo -e "${bold}\nSample appplication is deploying. Please wait...${reset}"
-		kubectl apply -f https://raw.githubusercontent.com/accuknox/samples/main/microservice-demo/release/kubernetes-manifests.yaml -n $ns
+		s=$(kubectl apply -f https://raw.githubusercontent.com/accuknox/samples/main/microservice-demo/release/kubernetes-manifests.yaml -n $ns)
 	else
 		echo -e "${bold}\nApplication is already deployed in $ns namespace${reset}"
 		kubectl get po -n $ns
@@ -140,17 +140,15 @@ if [[ -z $(kubectl get ns | grep $ns) ]]
   		
 	else
 		delete_boutique_app
-		echo ""
-		echo "Removing KubeArmor Policies. Please wait..."
+		echo -e "\n${bold}Sample application deleted${reset}"
+		echo -e "\n${bold}Removing KubeArmor Policies. Please wait...${reset}"
 		delete_boutique_policies
-		echo ""
-		echo "Removing CronJob. Please wait.."
+		echo -e "\n${bold}Removing CronJob. Please wait..${reset}"
 		delete_boutique_cron
 		echo ""
-		echo "Deleting $ns namespace. Please wait..."
+		echo -e "\n${bold}Deleting $ns namespace. Please wait...${reset}"
 		kubectl delete ns $ns
-		echo ""
-		echo "Successfully removed all components"
+		echo -e "${bold}Successfully removed all components${reset}"
 fi
 
 }
@@ -159,11 +157,11 @@ delete_boutique_app() {
 if [[ -z $(kubectl get po -n $ns | grep frontend-) ]]
 	then
 	
-  		echo -e "${bold}\nSample appplication is not found in $ns namespace${reset}"
+  		echo -e "${bold}\nSample application is not found in $ns namespace${reset}"
   		
 	else
-		echo -e  "\n${bold}Sample application deleting...${reset}"
-		kubectl delete -f https://raw.githubusercontent.com/accuknox/samples/main/microservice-demo/release/kubernetes-manifests.yaml -n $ns
+		echo -e  "\n${bold}Sample application deleting. Please wait...${reset}"
+		s=$(kubectl delete -f https://raw.githubusercontent.com/accuknox/samples/main/microservice-demo/release/kubernetes-manifests.yaml -n $ns)
 fi
 }
 
@@ -637,6 +635,15 @@ then
 
   log4j_deploy
 
+elif [[ ( $1 == "all" ) && ( $2 == "" ) ]]
+then
+  echo -e "\n${bold}-------------------------------------------------------\nDeploying boutique-app Scenrio${reset}"
+  boutique_deploy
+  echo -e "\n${bold}-------------------------------------------------------\nDeploying sysrv-hello cryptomining scenario${reset}"
+  sysrv_deploy
+  echo -e "\n${bold}-------------------------------------------------------\nDeploying log4j scenario${reset}"
+  log4j_deploy
+  
 elif [[ ( $1 == "boutique" ) && ( $2 == "del" ) ]]
 then
   
@@ -652,7 +659,16 @@ then
   
   log4j_remove
 
+elif [[ ( $1 == "all") && ( $2 == "del" ) ]]
+then
+  echo -e "\n${bold}-------------------------------------------------------\nDeleting boutique-app scenrio${reset}"
+  boutique_remove
+  echo -e "\n${bold}-------------------------------------------------------\nDeleting sysrv-hello cryptomining scenrio${reset}"
+  sysrv_remove
+  echo -e "\n${bold}-------------------------------------------------------\nDeleting log4j scenrio${reset}"
+  log4j_remove
+  
 else
 
-  echo -e "${bold}Use following commands for deploying and deleting.\n$0 boutique/sysrv/log4j ---> to deploy\n$0 boutique/sysrv/log4j del ---> to delete\nExample:- bash attack.sh boutique or bash attack.sh boutique del${reset}"
+  echo -e "${bold}Use following commands for deploying and deleting.\n$0 boutique/sysrv/log4j/all ---> to deploy\n$0 boutique/sysrv/log4j/all del ---> to delete\nExample:- bash attack.sh boutique or bash attack.sh boutique del${reset}"
 fi
