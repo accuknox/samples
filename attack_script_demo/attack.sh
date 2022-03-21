@@ -705,7 +705,7 @@ eof
 
   echo 
   tput bold setaf 2; echo "Removing Security Policy. Please wait..."
-  kubectl -n $ns_val delete -f https://raw.githubusercontent.com/accuknox/samples/main/tntbot/cnp-block-tnt_botinger.yaml
+  #kubectl -n $ns_val delete -f https://raw.githubusercontent.com/accuknox/samples/main/tntbot/cnp-block-tnt_botinger.yaml
   kubectl -n $ns_val delete -f https://raw.githubusercontent.com/accuknox/samples/main/tntbot/ksp-block-tnt-botinger.yaml
 
   echo
@@ -745,6 +745,8 @@ then
   sysrv_deploy
   echo -e "\n${bold}-------------------------------------------------------\nDeploying log4j scenario${reset}"
   log4j_deploy
+  echo -e "\n${bold}-------------------------------------------------------\nDeploying tnt-botinger scenario${reset}"
+  tntbot_deploy
   
 elif [[ ( $1 == "boutique" ) && ( $2 == "del" ) ]]
 then
