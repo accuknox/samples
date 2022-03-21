@@ -778,5 +778,5 @@ then
   tntbot_remove
 else
 
-  echo -e "${bold}Use following commands for deploying and deleting.\n$0 boutique/sysrv/log4j/tntbot/all ---> to deploy\n$0 boutique/sysrv/log4j/tntbot/all del ---> to delete\nExample:- bash attack.sh boutique or bash attack.sh boutique del${reset}"
+  echo -e "${bold}Use following commands for deploying and deleting. \n$0 boutique/sysrv/log4j/tntbot/all ---> to deploy\n$0 boutique/sysrv/log4j/tntbot/all del ---> to delete\nExample:- bash attack.sh boutique or bash attack.sh boutique del${reset}"
 fi
