@@ -3,8 +3,8 @@
 #To see all the scenarios --> bash attack.sh 
 #To deploy boutique scenario --> bash attack.sh boutique
 #To deploy log4j scenario --> bash attack.sh log4j
-#To deploy all scenrios --> bash attack.sh all
-#Use 'del' at the end to remove the scenrio
+#To deploy all scenarios --> bash attack.sh all
+#Use 'del' at the end to remove the scenario
 #To remove boutique scenario --> bash attack.sh boutique del
 #To remove log4j scenario --> bash attack.sh log4j del
 #To remove all scenrios --> bash attack.sh all del
