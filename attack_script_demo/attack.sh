@@ -1,4 +1,14 @@
 #! /bin/bash
+#To run the script use following commands.
+#To see all the scenarios --> bash attack.sh 
+#To deploy boutique scenario --> bash attack.sh boutique
+#To deploy log4j scenario --> bash attack.sh log4j
+#To deploy all scenrios --> bash attack.sh all
+#Use 'del' at the end to remove the scenrio
+#To remove boutique scenario --> bash attack.sh boutique del
+#To remove log4j scenario --> bash attack.sh log4j del
+#To remove all scenrios --> bash attack.sh all del
+
 bold=`tput bold setaf 2`
 reset=`tput sgr0`
 red=`tput setaf 1`
@@ -780,5 +790,5 @@ then
   tntbot_remove
 else
 
-  echo -e "${bold}\nUse following commands for deploying and deleting. \n\n$0 boutique/sysrv/log4j/tntbot/all ---> to deploy\n\n$0 boutique/sysrv/log4j/tntbot/all del ---> to delete\n\nExample:- bash attack.sh boutique or bash attack.sh boutique del${reset}\n"
+  echo -e "${bold}\nUse following commands for deploying and deleting. \n\nbash $0 boutique/sysrv/log4j/tntbot/all ---> to deploy\n\nbash $0 boutique/sysrv/log4j/tntbot/all del ---> to delete\n\nExample:- bash attack.sh boutique or bash attack.sh boutique del${reset}\n"
 fi
