@@ -1,0 +1,73 @@
+---
+# db-persistent-volume.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: vehicle-quotes-postgres-data-persisent-volume
+  labels:
+    type: local
+spec:
+  claimRef:
+    namespace: default
+    name: vehicle-quotes-postgres-data-persisent-volume-claim
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/home/kevin/projects/vehicle-quotes-postgres-data"
+---
+# db-persistent-volume-claim.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: vehicle-quotes-postgres-data-persisent-volume-claim
+spec:
+  volumeName: vehicle-quotes-postgres-data-persisent-volume
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: apps/v1
+ kind: Deployment
+ metadata:
+   name: vehicle-quotes-db
+ spec:
+   selector:
+     matchLabels:
+       app: vehicle-quotes-db
+   replicas: 1
+   template:
+     metadata:
+       labels:
+         app: vehicle-quotes-db
+     spec:
+       containers:
+         - name: vehicle-quotes-db
+           image: postgres:13
+           ports:
+             - containerPort: 5432
+               name: "postgres"
+           volumeMounts:
+             - mountPath: "/var/lib/postgresql/data"
+               name: vehicle-quotes-postgres-data-storage
+           env:
+             - name: POSTGRES_DB
+               value: vehicle_quotes
+             - name: POSTGRES_USER
+               value: vehicle_quotes
+             - name: POSTGRES_PASSWORD
+               value: password
+           resources:
+             limits:
+               memory: 4Gi
+               cpu: "2"
+       volumes:
+         - name: vehicle-quotes-postgres-data-storage
+           persistentVolumeClaim:
+             claimName: vehicle-quotes-postgres-data-persisent-volume-claim
+ ---
