@@ -51,3 +51,5 @@ vehicle_quotes=# \dt
 --------+------+-------+----------------
  public | test | table | vehicle_quotes
 (1 row)
+
+Ref: https://www.endpointdev.com/blog/2022/01/kubernetes-101/
