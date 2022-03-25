@@ -1,4 +1,4 @@
-!# /bin/bash
+#! /bin/bash
 kubectl create -f tasksapp.yaml
 #kubectl scale deployment tasksapp --replicas=3
 kubectl create -f tasksapp-svc.yaml
