@@ -271,7 +271,7 @@ spec:
               memory: 512Mi
             limits:
               cpu: 500m
-              memory: 1Gb
+              memory: 1024Mi
           volumeMounts: 
           - mountPath: /var/run 
             name: docker-sock 
