@@ -478,7 +478,7 @@ spec:
       template:
         metadata:
           labels:
-           app: java-ms
+           app: java-ms-cron
         spec:
           containers:
           - name: alpine-curl
