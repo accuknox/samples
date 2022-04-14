@@ -17,7 +17,7 @@ spec:
         - name: nginx18
           image: knoxuser/nginx18
           ports:
-            - containerPort: 5000
+            - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
