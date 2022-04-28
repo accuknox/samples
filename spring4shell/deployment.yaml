@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring4shell
+  labels:
+    deployment: spring4shell
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring4shell
+  template:
+    metadata:
+      labels:
+        app: spring4shell
+    spec:
+      containers:
+        - name: spring4shell
+          image: bobtheshoplifter/spring4shell-vulnerable-tomcat
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring4shell
+spec:
+  selector:
+    app: spring4shell
+  ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+  type: LoadBalancer
