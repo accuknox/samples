@@ -1,0 +1,62 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: autopol-network-cgetnipzvdmfsbm
+  namespace: java-ms-poc
+spec:
+  severity: 1
+  selector:
+    matchLabels:
+      app: java-ms
+  file:
+    matchPaths:
+    - path: /dev/random
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /dev/urandom
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /etc/gai.conf
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /etc/host.conf
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /etc/resolv.conf
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /lib/x86_64-linux-gnu/libcrypt.so.1
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /lib/x86_64-linux-gnu/libuuid.so.1
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /usr/lib/x86_64-linux-gnu/libapr-1.so.0
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    matchDirectories:
+    - dir: /proc/
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - dir: /sys/
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - dir: /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - dir: /usr/local/tomcat/
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+  network:
+    matchProtocols:
+    - protocol: raw
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - protocol: tcp
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - protocol: udp
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+  action: Allow
+---
