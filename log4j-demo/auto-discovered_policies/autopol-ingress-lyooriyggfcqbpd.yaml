@@ -1,0 +1,18 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: autopol-ingress-lyooriyggfcqbpd
+  namespace: java-ms-poc
+spec:
+  endpointSelector:
+    matchLabels:
+      app: java-ms
+  ingress:
+  - toPorts:
+    - ports:
+      - port: "8080"
+        protocol: TCP
+    fromEntities:
+    - remote-node
+    - world
