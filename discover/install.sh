@@ -207,7 +207,7 @@ EOF
 
 show_license
 check_prerequisites
-install_cilium_cli
+
 helm repo add bitnami https://charts.bitnami.com/bitnami &> /dev/null
 helm repo update
 
