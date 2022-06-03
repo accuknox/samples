@@ -216,7 +216,7 @@ statusline AOK "explorer namespace created/already present."
 
 autoDetectEnvironment
 
-installCilium
+
 handleLocalStorage apply
 installMysql
 #installFeeder
