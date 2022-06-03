@@ -62,6 +62,7 @@ check_prerequisites()
 			install_cilium_help
 			echo "Require 'cilium' cli tool."
 			statusline NOK "cilium cli tool not found"
+			install_cilium_cli
 			exit 1
 		}
 	statusline AOK "cilium cli tool found"
