@@ -120,7 +120,7 @@ _Example output - do not copy_
 EXTERNAL-IP
 <your-ip>
 ```
-Go to the URL `http:EXTERNAL_IP//:8080/onlinebookstore/`
+Go to the URL `http://EXTERNAL_IP:8080/onlinebookstore/`
 
 **Note**- you may see  `<pending>`  while GCP provisions the load balancer. If this happens, wait a few minutes and re-run the command.
 
