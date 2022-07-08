@@ -1,0 +1,29 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "log4j-rule-to-block-rmi-access"
+spec:
+  endpointSelector:
+    matchLabels:
+      app: java-ms
+  egressDeny:
+  - toEntities:
+    - "world"
+  - toPorts:
+    - ports:
+      - port: "1099"
+      - port: "1389"
+  egress:
+    - toEntities:
+      - "all"
+    - toEndpoints:
+      - matchLabels:
+          "k8s:io.kubernetes.pod.namespace": kube-system
+          "k8s:k8s-app": kube-dns
+      toPorts:
+        - ports:
+           - port: "53"
+             protocol: ANY
+          rules:
+            dns:
+              - matchPattern: "*"
