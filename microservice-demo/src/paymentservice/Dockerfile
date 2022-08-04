@@ -19,9 +19,10 @@ FROM base as builder
 # Some packages (e.g. @google-cloud/profiler) require additional
 # deps for post-install scripts
 RUN apk add --update --no-cache \
-    python \
+    python3 \
     make \
-    g++ 
+    g++ \
+    && ln -sf python3 /usr/bin/python
 
 WORKDIR /usr/src/app
 
