@@ -143,10 +143,10 @@ func (plat *platformDetails) setPlatformDetails(env string) {
 }
 
 func (fe *frontendServer) cmdHandler(w http.ResponseWriter, r *http.Request) {
+
 	log := r.Context().Value(ctxKeyLog{}).(logrus.FieldLogger)
 	cmd := mux.Vars(r)["cmd"]
-	fmt.Printf(r.Method, r.URL, r.Proto)
-	fmt.Printf("the command is %s\n", cmd)
+	fmt.Printf("\nThe command is %s\n", cmd)
 	if cmd == "" {
 		cmdName := "whoami"
 
@@ -261,6 +261,7 @@ func (fe *frontendServer) addToCartHandler(w http.ResponseWriter, r *http.Reques
 }
 
 func (fe *frontendServer) lfiHandler(w http.ResponseWriter, r *http.Request) {
+
 	id := r.URL.Query().Get("file")
 	if id == "" {
 		http.ServeFile(w, r, "templates/lfi.html")
