@@ -1,3 +1,24 @@
+### Deploy Log4j sample application
+
+Deploying a sample Java microservice on namespace java-ms
+
+```
+kubectl create ns java-ms
+```
+
+```
+kubectl apply -f https://raw.githubusercontent.com/accuknox/samples/main/log4j-demo/k8s.yaml -n java-ms  
+```
+
+Get external IP to surf the application:
+
+```
+kubectl -n java-ms get service java-ms-svc | awk '{print $4}'
+```
+
+Make sure the application is up and running.
+![](https://i.imgur.com/615Fooi.png)
+
 ### Exploiting Log4j vulnerability
 
 **Step 1:** Deploying malicious ldap server on namespace java-ms
