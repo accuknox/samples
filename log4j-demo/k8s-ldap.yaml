@@ -2,27 +2,27 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: nc-pod
-  name: nc-pod
+    app: ldap-pod
+  name: ldap-pod
 spec:
   selector:
     matchLabels:
-      app: nc-pod
+      app: ldap-pod
   template:
     metadata:
       labels:
-        app: nc-pod
+        app: ldap-pod
     spec:
       containers:
-        - name: nc-pod
+        - name: ldap-pod
           image: knoxuser/nc-pod
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: nc-pod
-  name: nc-svc
+    app: ldap-pod
+  name: ldap-svc
 spec:
   ports:
   - name: "4444"
@@ -38,7 +38,7 @@ spec:
     protocol: TCP
     targetPort: 1389
   selector:
-    app: nc-pod
+    app: ldap-pod
   type: LoadBalancer
 status:
   loadBalancer: {}
