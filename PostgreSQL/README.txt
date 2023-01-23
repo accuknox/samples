@@ -1,3 +1,24 @@
+Create persistant voulume for your deployment
+
+kubectl apply -f 
+
+Create persistant volume claim
+
+kubectl apply -f 
+
+Deploy Postgres Server 
+
+kubectl apply -f 
+
+Create service for the deployment
+
+kubectl apply -f 
+
+Check everything is running fine 
+
+kubectl get po -A
+
+
 Connecting to the database
 Let’s try connecting to the Postgres instance that we just deployed. Take note of the pod’s name and try:
 
