@@ -1,18 +1,14 @@
-Create persistant voulume for your deployment
+Create persistant voulume and persistant volume claim for your deployment
 
-kubectl apply -f 
-
-Create persistant volume claim
-
-kubectl apply -f 
+kubectl apply -f pv-pvc.yaml
 
 Deploy Postgres Server 
 
-kubectl apply -f 
+kubectl apply -f postgres.yaml
 
 Create service for the deployment
 
-kubectl apply -f 
+kubectl apply -f postgres-service.yaml
 
 Check everything is running fine 
 
@@ -45,32 +41,5 @@ vehicle_quotes=# \l
  vehicle_quotes | vehicle_quotes | UTF8     | en_US.utf8 | en_US.utf8 |
 (4 rows)
 
-
-
-Checking Persistant volume 
-
-Now, try connecting to the database (using kubectl exec -it <VEHICLE_QUOTES_DB_POD_NAME> -- bash and then psql -U vehicle_quotes) and creating some tables. Something simple like this would work:
-
-CREATE TABLE test (test_field varchar);
-Now, close psql and the bash in the pod and delete the objects:
-
-$ kubectl delete -f db-deployment.yaml
-$ kubectl delete -f db-persistent-volume-claim.yaml
-$ kubectl delete -f db-persistent-volume.yaml
-Create them again:
-
-$ kubectl apply -f db-persistent-volume.yaml
-$ kubectl apply -f db-persistent-volume-claim.yaml
-$ kubectl apply -f db-deployment.yaml
-Connect to the database again and you should see that the table is still there:
-
-vehicle_quotes=# \c vehicle_quotes
-You are now connected to database "vehicle_quotes" as user "vehicle_quotes".
-vehicle_quotes=# \dt
-           List of relations
- Schema | Name | Type  |     Owner
---------+------+-------+----------------
- public | test | table | vehicle_quotes
-(1 row)
 
 Ref: https://www.endpointdev.com/blog/2022/01/kubernetes-101/
