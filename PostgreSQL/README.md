@@ -32,6 +32,9 @@ From here, you can connect to the database using the psql command line client. R
     psql (13.3 (Debian 13.3-1.pgdg100+1))
     Type "help" for help.
     
+    
+ 
+    
     vehicle_quotes=# \l
                                                 List of databases
           Name      |     Owner      | Encoding |  Collate   |   Ctype    |         Access privileges
@@ -45,3 +48,11 @@ From here, you can connect to the database using the psql command line client. R
     (4 rows)
 
 Ref: [https://www.endpointdev.com/blog/2022/01/kubernetes-101/](https://www.endpointdev.com/blog/2022/01/kubernetes-101/)
+
+
+
+**CVE-2019–9193 - PostgreSQL 9.3-12.3 Authenticated Remote Code Execution**
+
+***Proof of Concept***
+PostgreSQL Database from version 9.3 to 12.3 (latest tested) are vulnerable to Authenticated Remote Code Execution.
+Even if it isn't considered to be a vulnerability itself by the development team, this could be leveraged to gain access to a misconfigured system.
